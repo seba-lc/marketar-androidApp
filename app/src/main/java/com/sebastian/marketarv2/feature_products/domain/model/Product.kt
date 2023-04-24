@@ -2,12 +2,11 @@ package com.sebastian.marketarv2.feature_products.domain.model
 
 data class Product(
 
-    val _id : String,
     val category: String,
     val createdAt: String,
-    val delta: Int,
+    val delta: Double,
     val image: String,
-    val minUnit: Int,
+    val minUnit: Double,
     val price: Int,
     val productName: String,
     val unit: String,

@@ -1,26 +1,26 @@
 package com.sebastian.marketarv2.feature_products.presentation.products
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sebastian.marketarv2.feature_products.domain.model.util.OrderType
 import com.sebastian.marketarv2.feature_products.domain.model.util.ProductOrder
-import com.sebastian.marketarv2.feature_products.domain.use_case.ProductUseCases
+import com.sebastian.marketarv2.feature_products.domain.use_case.GetProducts
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ProductsViewModel @Inject constructor(
-    private val productUseCases: ProductUseCases
+    private val productUseCases: GetProducts
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ProductsState())
-    val state: StateFlow<ProductsState> get() = _state
+    val state: StateFlow<ProductsState> = _state
 
     init {
-        getProducts(ProductOrder.All(OrderType.Descending))
+        getProducts(ProductOrder.All(OrderType.Ascending))
     }
 
     fun onEvent(event: ProductsEvent) {
@@ -43,7 +43,7 @@ class ProductsViewModel @Inject constructor(
     private fun getProducts(productOrder: ProductOrder) {
         viewModelScope.launch {
             try {
-                val products = productUseCases.getProducts(productOrder, null)
+                val products = productUseCases(productOrder, null)
                 _state.value = state.value.copy(
                     products = products,
                     productsOrder = productOrder

@@ -1,12 +1,13 @@
 package com.sebastian.marketarv2.feature_products.domain.use_case
 
+import com.sebastian.marketarv2.feature_products.data.repository.MarketRepositoryImpl
 import com.sebastian.marketarv2.feature_products.domain.model.Product
 import com.sebastian.marketarv2.feature_products.domain.model.util.OrderType
 import com.sebastian.marketarv2.feature_products.domain.model.util.ProductOrder
-import com.sebastian.marketarv2.feature_products.domain.repository.ProductRepository
+import javax.inject.Inject
 
-class GetProducts(
-    private val repository: ProductRepository
+class GetProducts @Inject constructor(
+    private val repository: MarketRepositoryImpl
 ) {
 
     suspend operator fun invoke(
@@ -50,5 +51,9 @@ class GetProducts(
         return result
 
     }
+
+//    suspend operator fun invoke() : List<Product> {
+//        return repository.getProducts().sortedBy { it.productName }
+//    }
 
 }

@@ -2,20 +2,19 @@ package com.sebastian.marketarv2.feature_products.data.repository
 
 import com.sebastian.marketarv2.feature_products.data.data_source.ProductDao
 import com.sebastian.marketarv2.feature_products.domain.model.Product
-import com.sebastian.marketarv2.feature_products.domain.repository.ProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ProductRepositoryImpl(
-    private val dao: ProductDao
-) : ProductRepository {
+class MarketRepositoryImpl @Inject constructor(
+    private val productDao: ProductDao
+) {
 
-    override suspend fun getProducts(): List<Product> {
+    suspend fun getProducts() : List<Product> {
         return withContext(Dispatchers.IO) {
-            val products = dao.getProducts()
+            val products = productDao.getProducts()
             products.body() ?: emptyList()
         }
-
     }
 
 }

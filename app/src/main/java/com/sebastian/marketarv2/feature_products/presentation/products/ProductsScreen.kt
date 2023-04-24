@@ -8,18 +8,22 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.sebastian.marketarv2.feature_products.domain.model.Product
+import com.sebastian.marketarv2.feature_products.presentation.products.components.ProductCard
 
 @Composable
 fun ProductsScreen(
-    state: ProductsState
+    viewModel: ProductsViewModel,
+    navController: NavController
 ) {
-//    val state by viewModel.state
-//    val scope = rememberCoroutineScope()
+    val state by viewModel.state.collectAsState()
+    val scope = rememberCoroutineScope()
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
 
         items(state.products) {product ->
-            Text(text = product.productName + "..... $" + product.price)
+            ProductCard(item = product)
         }
 
     }

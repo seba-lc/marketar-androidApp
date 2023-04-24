@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.core
+package com.sebastian.marketarv2.feature_products.core.util
 
 class Constants {
 
