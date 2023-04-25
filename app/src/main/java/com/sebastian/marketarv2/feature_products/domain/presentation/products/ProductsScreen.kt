@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.presentation.products
+package com.sebastian.marketarv2.feature_products.domain.presentation.products
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,12 +9,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.sebastian.marketarv2.feature_cart.presentation.cart.CartViewModel
 import com.sebastian.marketarv2.feature_products.domain.model.Product
-import com.sebastian.marketarv2.feature_products.presentation.products.components.ProductCard
+import com.sebastian.marketarv2.feature_products.domain.presentation.products.components.ProductCard
 
 @Composable
 fun ProductsScreen(
     viewModel: ProductsViewModel,
+    cartViewModel: CartViewModel,
     navController: NavController
 ) {
     val state by viewModel.state.collectAsState()
@@ -23,7 +25,10 @@ fun ProductsScreen(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
 
         items(state.products) {product ->
-            ProductCard(item = product)
+            ProductCard(
+                item = product,
+                viewModel = cartViewModel
+            )
         }
 
     }

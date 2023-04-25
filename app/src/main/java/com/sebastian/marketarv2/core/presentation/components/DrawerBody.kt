@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.core.presentation.components
+package com.sebastian.marketarv2.core.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sebastian.marketarv2.feature_products.core.util.MenuItem
+import com.sebastian.marketarv2.core.util.MenuItem
 
 @Composable
 fun DrawerBody(

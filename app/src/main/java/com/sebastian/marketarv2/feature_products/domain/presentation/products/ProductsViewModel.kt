@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.presentation.products
+package com.sebastian.marketarv2.feature_products.domain.presentation.products
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

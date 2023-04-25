@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.core.util
+package com.sebastian.marketarv2.core.util
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -8,13 +8,13 @@ import androidx.compose.material.icons.filled.ShoppingCart
 
 fun getMenuItems() : List<MenuItem> = listOf(
     MenuItem(
-        id = "main",
+        id = "products",
         title = "Home",
         contentDescription = "Go to Home Screen",
         icon = Icons.Default.Home
     ),
     MenuItem(
-        id = "landing",
+        id = "products",
         title = "Landing",
         contentDescription = "Go to Landing Screen",
         icon = Icons.Default.List

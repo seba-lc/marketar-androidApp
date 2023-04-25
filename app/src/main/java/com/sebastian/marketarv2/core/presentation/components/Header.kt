@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.core.presentation.components
+package com.sebastian.marketarv2.core.presentation.components
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons

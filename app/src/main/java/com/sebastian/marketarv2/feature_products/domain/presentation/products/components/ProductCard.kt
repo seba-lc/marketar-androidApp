@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.presentation.products.components
+package com.sebastian.marketarv2.feature_products.domain.presentation.products.components
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -15,10 +15,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.sebastian.marketarv2.feature_cart.presentation.cart.CartEvents
+import com.sebastian.marketarv2.feature_cart.presentation.cart.CartViewModel
 import com.sebastian.marketarv2.feature_products.domain.model.Product
 
 @Composable
-fun ProductCard(item: Product) {
+fun ProductCard(
+    item: Product,
+    viewModel: CartViewModel
+) {
 
     val painter = rememberImagePainter(
         data = "https://storage.googleapis.com/marketar_bucket/" + item.image,
@@ -71,6 +76,8 @@ fun ProductCard(item: Product) {
 
                 Text(text = item.productName, style = TextStyle(fontSize = 16.sp, textAlign = TextAlign.Center))
                 Text(text = "$${item.price}/${item.unit}", style = TextStyle(fontSize = 20.sp))
+                Text(text = "Cant. Min : ${item.minUnit}/${item.unit}", style = TextStyle(fontSize = 12.sp, textAlign = TextAlign.Center))
+                Text(text = "Incr.: ${item.delta}/${item.unit}", style = TextStyle(fontSize = 12.sp, textAlign = TextAlign.Center))
 
             }
 
@@ -117,7 +124,7 @@ fun ProductCard(item: Product) {
                             .weight(1f)
                             .border(BorderStroke(1.dp, Color.Black))
                             .clickable {
-                                //TODO
+                                viewModel.onEvent(CartEvents.AddProduct, item)
                             },
                         contentAlignment = Alignment.Center
                     ) {

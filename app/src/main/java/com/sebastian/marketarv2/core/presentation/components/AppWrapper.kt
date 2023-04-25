@@ -11,9 +11,9 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavController
-import com.sebastian.marketarv2.feature_products.core.presentation.components.DrawerBody
-import com.sebastian.marketarv2.feature_products.core.presentation.components.Header
-import com.sebastian.marketarv2.feature_products.core.util.getMenuItems
+import com.sebastian.marketarv2.core.presentation.components.DrawerBody
+import com.sebastian.marketarv2.core.presentation.components.Header
+import com.sebastian.marketarv2.core.util.getMenuItems
 import kotlinx.coroutines.launch
 
 @Composable

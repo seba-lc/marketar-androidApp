@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.core.util
+package com.sebastian.marketarv2.core.util
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

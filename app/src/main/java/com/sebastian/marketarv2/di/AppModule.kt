@@ -1,6 +1,6 @@
 package com.sebastian.marketarv2.di
 
-import com.sebastian.marketarv2.feature_products.core.util.Constants.Companion.BASE_URL
+import com.sebastian.marketarv2.core.util.Constants.Companion.BASE_URL
 import com.sebastian.marketarv2.feature_products.data.data_source.ProductDao
 import dagger.Module
 import dagger.Provides
