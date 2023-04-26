@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sebastian.marketarv2.feature_cart.domain.model.CartProduct
 import com.sebastian.marketarv2.feature_cart.domain.use_case.AddProduct
+import com.sebastian.marketarv2.feature_cart.domain.use_case.DeleteProduct
+import com.sebastian.marketarv2.feature_cart.domain.use_case.SubstractProduct
 import com.sebastian.marketarv2.feature_products.domain.model.Product
 import com.sebastian.marketarv2.feature_products.domain.use_case.GetProducts
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val addProduct: AddProduct
+    private val addProduct: AddProduct,
+    private val substractProduct: SubstractProduct,
+    private val deleteProduct: DeleteProduct
 ) : ViewModel() {
 
     private val _state = mutableStateOf(CartState())
@@ -31,6 +35,13 @@ class CartViewModel @Inject constructor(
             is CartEvents.AddProduct -> {
                 addProduct(product, state, _state)
             }
+            is CartEvents.SubstractProduct -> {
+                substractProduct(product, state, _state)
+            }
+            is CartEvents.DeleteProduct -> {
+                deleteProduct(product, state, _state)
+            }
+
         }
     }
 

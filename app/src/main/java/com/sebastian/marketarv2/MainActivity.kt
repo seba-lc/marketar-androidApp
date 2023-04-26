@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(route = Screen.CheckoutScreen.route) {
-                                CheckoutScreen(viewModel = cartViewModel)
+                                CheckoutScreen(viewModel = cartViewModel, productsViewModel = productsViewModel)
                             }
                         }
                     }

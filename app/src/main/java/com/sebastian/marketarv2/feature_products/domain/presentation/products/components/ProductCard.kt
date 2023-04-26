@@ -25,6 +25,8 @@ fun ProductCard(
     viewModel: CartViewModel
 ) {
 
+    println("ME VUELVO A REPRODUCIR")
+    val cart = viewModel.state.value.products
     val painter = rememberImagePainter(
         data = "https://storage.googleapis.com/marketar_bucket/" + item.image,
         builder = {
@@ -101,7 +103,7 @@ fun ProductCard(
                             .weight(1f)
                             .border(BorderStroke(1.dp, Color.Black))
                             .clickable {
-                                //TODO
+                                viewModel.onEvent(CartEvents.SubstractProduct, item)
                             },
                         contentAlignment = Alignment.Center
                     ) {
@@ -116,7 +118,13 @@ fun ProductCard(
 
                     ) {
                         //ACA IRA EL ESTADO QUE IRA ARMANDO EL CARRITO
-                        Text(text = "0", style = TextStyle(fontSize = 20.sp))
+
+                        var itemQuantity = 0.0
+                        val cartProduct = cart.find { cartProduct -> cartProduct.productName == item.productName }
+                        if(cartProduct != null) {
+                            itemQuantity = cartProduct.quantity
+                        }
+                        Text(text = itemQuantity.toString(), style = TextStyle(fontSize = 20.sp))
                     }
                     Box(
                         modifier = Modifier
@@ -131,6 +139,8 @@ fun ProductCard(
                         Text(text = "+", style = TextStyle(fontSize = 20.sp))
                     }
                 }
+
+
             }
 
         }

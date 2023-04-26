@@ -8,7 +8,8 @@ data class CartProduct(
     val category: String,
     val image: String,
     val unit: String,
-    val quantity: Double
+    val quantity: Double,
+    val price: Int
 
 )
 
