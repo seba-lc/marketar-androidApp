@@ -1,6 +1,6 @@
 package com.sebastian.marketarv2.feature_products.domain.use_case
 
-import com.sebastian.marketarv2.feature_products.data.repository.MarketRepositoryImpl
+import com.sebastian.marketarv2.core.data.repository.MarketRepositoryImpl
 import com.sebastian.marketarv2.feature_products.domain.model.Product
 import com.sebastian.marketarv2.feature_products.domain.model.util.OrderType
 import com.sebastian.marketarv2.feature_products.domain.model.util.ProductOrder

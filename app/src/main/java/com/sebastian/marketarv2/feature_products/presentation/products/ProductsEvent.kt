@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.domain.presentation.products
+package com.sebastian.marketarv2.feature_products.presentation.products
 
 import com.sebastian.marketarv2.feature_products.domain.model.util.ProductOrder
 

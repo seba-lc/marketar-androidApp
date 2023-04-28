@@ -13,10 +13,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sebastian.marketarv2.feature_cart.presentation.cart.CartViewModel
 import com.sebastian.marketarv2.feature_cart.presentation.cart.CheckoutScreen
-import com.sebastian.marketarv2.feature_products.domain.presentation.products.ProductsScreen
-import com.sebastian.marketarv2.feature_products.domain.presentation.products.ProductsViewModel
+import com.sebastian.marketarv2.feature_orders.presentation.OrdersViewModel
+import com.sebastian.marketarv2.feature_products.presentation.products.ProductsScreen
+import com.sebastian.marketarv2.feature_products.presentation.products.ProductsViewModel
 import com.sebastian.marketarv2.feature_products.presentation.util.AppWrapper
-import com.sebastian.marketarv2.feature_products.domain.presentation.util.Screen
+import com.sebastian.marketarv2.feature_products.presentation.util.Screen
 import com.sebastian.marketarv2.ui.theme.MarketarV2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val productsViewModel = viewModel(modelClass = ProductsViewModel::class.java)
             val cartViewModel = viewModel(modelClass = CartViewModel::class.java)
+            val ordersViewModel = viewModel(modelClass = OrdersViewModel::class.java)
 
             val navController = rememberNavController()
 
@@ -47,7 +49,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(route = Screen.CheckoutScreen.route) {
-                                CheckoutScreen(viewModel = cartViewModel, productsViewModel = productsViewModel)
+                                CheckoutScreen(viewModel = cartViewModel, productsViewModel = productsViewModel, ordersViewModel = ordersViewModel)
                             }
                         }
                     }

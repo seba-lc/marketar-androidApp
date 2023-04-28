@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.domain.presentation.util
+package com.sebastian.marketarv2.feature_products.presentation.util
 
 sealed class Screen(val route: String) {
     object ProductScreen : Screen("products")

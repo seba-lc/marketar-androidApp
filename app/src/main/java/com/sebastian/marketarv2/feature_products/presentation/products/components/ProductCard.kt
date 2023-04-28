@@ -1,4 +1,4 @@
-package com.sebastian.marketarv2.feature_products.domain.presentation.products.components
+package com.sebastian.marketarv2.feature_products.presentation.products.components
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +19,7 @@ import coil.compose.rememberImagePainter
 import com.sebastian.marketarv2.feature_cart.presentation.cart.CartEvents
 import com.sebastian.marketarv2.feature_cart.presentation.cart.CartViewModel
 import com.sebastian.marketarv2.feature_products.domain.model.Product
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProductCard(
@@ -25,7 +27,7 @@ fun ProductCard(
     viewModel: CartViewModel
 ) {
 
-    println("ME VUELVO A REPRODUCIR")
+    val scope = rememberCoroutineScope()
     val cart = viewModel.state.value.products
     val painter = rememberImagePainter(
         data = "https://storage.googleapis.com/marketar_bucket/" + item.image,
@@ -103,7 +105,9 @@ fun ProductCard(
                             .weight(1f)
                             .border(BorderStroke(1.dp, Color.Black))
                             .clickable {
-                                viewModel.onEvent(CartEvents.SubstractProduct, item)
+                                scope.launch {
+                                    viewModel.onEvent(CartEvents.SubstractProduct, item)
+                                }
                             },
                         contentAlignment = Alignment.Center
                     ) {
@@ -132,7 +136,10 @@ fun ProductCard(
                             .weight(1f)
                             .border(BorderStroke(1.dp, Color.Black))
                             .clickable {
-                                viewModel.onEvent(CartEvents.AddProduct, item)
+                                scope.launch {
+                                    viewModel.onEvent(CartEvents.AddProduct, item)
+                                }
+
                             },
                         contentAlignment = Alignment.Center
                     ) {

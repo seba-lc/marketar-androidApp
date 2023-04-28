@@ -4,4 +4,5 @@ sealed class CartEvents {
     object AddProduct : CartEvents()
     object SubstractProduct : CartEvents()
     object DeleteProduct : CartEvents()
+    object DeleteCart : CartEvents()
 }

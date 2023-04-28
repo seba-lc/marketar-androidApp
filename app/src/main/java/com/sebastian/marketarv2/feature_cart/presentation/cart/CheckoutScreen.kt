@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,15 +26,26 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.sebastian.marketarv2.feature_products.domain.presentation.products.ProductsViewModel
+import com.sebastian.marketarv2.core.data.repository.MarketRepositoryImpl
+import com.sebastian.marketarv2.feature_cart.domain.model.CartProduct
+import com.sebastian.marketarv2.feature_orders.domain.model.Order
+import com.sebastian.marketarv2.feature_orders.presentation.OrdersEvents
+import com.sebastian.marketarv2.feature_orders.presentation.OrdersViewModel
+import com.sebastian.marketarv2.feature_products.presentation.products.ProductsViewModel
+import kotlinx.coroutines.launch
+import retrofit2.Response
+import java.io.IOException
 
 @Composable
 fun CheckoutScreen(
     viewModel: CartViewModel,
-    productsViewModel: ProductsViewModel
+    productsViewModel: ProductsViewModel,
+    ordersViewModel: OrdersViewModel
 ) {
     val state by viewModel.state
     val productsState by productsViewModel.state.collectAsState()
+    val orderState by ordersViewModel.state.collectAsState()
+    val scope = rememberCoroutineScope()
 
     var totalPrice = 0.0
     viewModel.state.value.products.forEach { product ->
@@ -86,7 +98,9 @@ fun CheckoutScreen(
                         IconButton(
                             onClick = {
                                 if (productItem != null) {
-                                    viewModel.onEvent(CartEvents.DeleteProduct, productItem)
+                                    scope.launch {
+                                        viewModel.onEvent(CartEvents.DeleteProduct, productItem)
+                                    }
                                 }
                             }
                         ) {
@@ -111,8 +125,16 @@ fun CheckoutScreen(
         )
         if (state.products.size != 0) {
             Button(
-                onClick = {
+                onClick =  {
                     //Acá quiero generar el POST a mi API
+                    scope.launch {
+                        try {
+                            viewModel.onEvent(CartEvents.DeleteCart, null)
+                            ordersViewModel.onEvent(OrdersEvents.PostOrder, viewModel.state.value.products)
+                        } catch (e: IOException) {
+                            println(e)
+                        }
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -124,5 +146,5 @@ fun CheckoutScreen(
 
     }
 
-
 }
+
